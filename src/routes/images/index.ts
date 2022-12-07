@@ -1,10 +1,10 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { promises as fs } from "fs";
 import { convertImage } from "../../utils/convertImage";
 
 const imageRouter = Router();
 
-imageRouter.get("/", async (req, res) => {
+imageRouter.get("/", async (req: Request, res: Response) => {
   const filename = req.query.filename as string;
   const width = Number(req.query.width);
   const height = Number(req.query.height);

@@ -8,7 +8,11 @@ type Input = {
   height: number;
 };
 
-export const convertImage = async ({ filename, width, height }: Input) => {
+export const convertImage = async ({
+  filename,
+  width,
+  height,
+}: Input): Promise<string> => {
   const filepath = path.join(
     __dirname,
     "..",
