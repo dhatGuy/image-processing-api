@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { promises as fs } from "fs";
 import { convertImage } from "../../utils/convertImage";
 
 const imageRouter = Router();
@@ -13,6 +14,29 @@ imageRouter.get("/", async (req, res) => {
       message: "filename, width and height query parameter is required",
     });
   }
+
+  const files = (await fs.readdir(__dirname + "/../../../images/original")).map(
+    (file) => file.split(".")[0]
+  );
+
+  if (!files.includes(filename)) {
+    return res.status(400).send(`
+      <p>Invalid filename. Please use one of the following:</p>
+      <ol>
+      ${files
+        .map(
+          (file) => `
+        <li>
+          <a href="/api/images?filename=${file}&width=200&height=200">
+            /api/images?filename=${file}&width=200&height=200
+          </a>
+        </li>`
+        )
+        .join("")}
+      </ol>
+    `);
+  }
+
   try {
     const image = await convertImage({
       filename,

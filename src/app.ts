@@ -7,7 +7,7 @@ app.use("/api/images", imageRouter);
 
 app.use("*", (_, res) => {
   res.status(404).send(`
-    <p>Please use the following endpoints:</p>
+    <p>try of the following endpoints:</p>
     <ol>
       <li><a href="/api/images?filename=louise&width=200&height=200">/api/images?filename=louise&width=200&height=200</a></li>
       <li><a href="/api/images?filename=tina&width=200&height=200">/api/images?filename=tina&width=200&height=200</a></li>
